@@ -1,0 +1,13 @@
+<div class="list">
+    <div class="list-wrapper">
+        <ul>
+            <li *ngFor="let option of options" class="list-option">
+                <div class="list-option-wrapper">
+                    <i *ngIf="option.icon" [ngClass]="'pi pi-' + option.icon.name"
+                        [ngStyle]="{ color: option.icon.color}"></i>
+                    <span>{{option.label}}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

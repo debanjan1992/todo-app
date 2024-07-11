@@ -1,0 +1,27 @@
+.app-user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 5px 9px;
+    cursor: pointer;
+
+    .details {
+        flex: 1;
+
+        .name {
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .email {
+            font-size: 0.8em;
+            color: var(--text-secondary-color);
+
+            i {
+                color: rgb(175, 175, 175);
+                font-size: 0.75em;
+                margin-left: 10px;
+            }
+        }
+    }
+}

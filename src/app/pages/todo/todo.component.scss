@@ -1,0 +1,11 @@
+.todo {
+    display: flex;
+    border: 1px solid gray;
+
+    .panel {
+        &:nth-child(1) {
+            min-width: 200px;
+            border-right: 1px solid gray;
+        }
+    }
+}

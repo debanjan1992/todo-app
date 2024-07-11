@@ -1,0 +1,11 @@
+<div class="app-user" *ngIf="user">
+    <p-avatar [label]="user.firstName[0] + user.lastName[0]" styleClass="mr-2"
+        size="xlarge" shape="circle" />
+    <div class="details">
+        <div class="name">{{ user.firstName + ' ' + user.lastName }}</div>
+        <div class="email">
+            <span>{{ user.email }}</span>
+            <i class="pi pi-arrows-v"></i>
+        </div>
+    </div>
+</div>

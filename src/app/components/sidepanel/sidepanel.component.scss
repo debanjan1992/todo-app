@@ -1,0 +1,40 @@
+.sidepanel {
+    display: flex;
+    flex-direction: column;
+
+    .sidepanel-lists {
+        flex: 1;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    .app-list {
+        margin-top: 20px;
+    }
+
+    .user,
+    .search-field {
+        padding: 7px 12px;
+    }
+
+    .actions {
+        margin: 20px 0;
+
+        #new-list {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 7px 12px;
+            cursor: pointer;
+            user-select: none;
+            margin: 5px;
+            border-radius: 6px;wt
+
+            &:hover {
+                background-color: var(--highlight-bg);
+            }
+        }
+    }
+}

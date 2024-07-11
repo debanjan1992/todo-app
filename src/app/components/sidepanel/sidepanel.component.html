@@ -1,0 +1,26 @@
+<div class="sidepanel">
+    <div class="user">
+        <app-user></app-user>
+    </div>
+    <div class="search-field">
+        <p-iconField iconPosition="right">
+            <p-inputIcon styleClass="pi pi-search" />
+            <input type="text" pInputText placeholder="Search" />
+        </p-iconField>
+    </div>
+    <div class="sidepanel-lists">
+        <div class="app-list">
+            <app-list [options]="defaultList"></app-list>
+        </div>
+        <p-divider></p-divider>
+        <div class="app-list">
+            <app-list [options]="userList"></app-list>
+        </div>
+    </div>
+    <div class="actions">
+        <div id="new-list">
+            <i class="pi pi-plus"></i>
+            <span>New List</span>
+        </div>
+    </div>
+</div>
