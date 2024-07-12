@@ -1,0 +1,10 @@
+<div class="task" [ngClass]="{'completed': task.completed}">
+    <div class="task-wrapper" #taskEl>
+        <i class="pi pi-circle" *ngIf="!task.completed" (click)="toggleCompleted()"></i>
+        <i class="pi pi-check-circle" *ngIf="task.completed" (click)="toggleCompleted()"></i>
+        <span>{{task.title}}</span>
+        <i class="pi pi-star" *ngIf="!task.important" (click)="toggleImportant()"></i>
+        <i class="pi pi-star-fill" *ngIf="task.important" (click)="toggleImportant()"></i>
+    </div>
+    <p-contextMenu [target]="taskEl" [model]="menuItems" />
+</div>

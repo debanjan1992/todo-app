@@ -1,0 +1,43 @@
+.task {
+    background-color: var(--surface-50);
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px 18px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--surface-100);
+    }
+
+    .task-wrapper {
+        display: flex;
+        align-items: center;
+        gap: var(--inline-spacing);
+
+        span {
+            flex: 1;
+        }
+
+        i {
+            color: var(--text-secondary-color);
+
+            &:hover {
+                color: var(--pink-500);
+            }
+        }
+    }
+
+    &.completed {
+        i {
+            color: var(--pink-500) !important;
+
+            &:hover {
+                color: var(--text-secondary-color);
+            }
+        }
+        span {
+            text-decoration: line-through;
+        }
+    }
+}

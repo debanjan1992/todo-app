@@ -13,9 +13,21 @@
                     align-items: center;
                     gap: 20px;
                     padding: 10px 16px;
+
+                    div {
+                        min-width: 200px;
+
+                        &[contenteditable] {
+                            outline: none;
+                            border: 1px solid rgb(88, 88, 88);
+                            padding: 5px 12px;
+                            border-bottom: 2px solid var(--primary-color);
+                            border-radius: var(--border-radius);
+                        }
+                    }
                 }
 
-                &:hover {
+                &:hover,&.active {
                     background-color: var(--highlight-bg);
                 }
             }

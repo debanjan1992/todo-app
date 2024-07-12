@@ -10,15 +10,15 @@
     </div>
     <div class="sidepanel-lists">
         <div class="app-list">
-            <app-list [options]="defaultList"></app-list>
+            <app-list [options]="defaultList" (onListItemSelected)="onDefaultListItemSelected($event)"></app-list>
         </div>
         <p-divider></p-divider>
         <div class="app-list">
-            <app-list [options]="userList"></app-list>
+            <app-list [options]="userList" [addNewList]="newList" (onListItemSelected)="onUserListItemSelected($event)"></app-list>
         </div>
     </div>
     <div class="actions">
-        <div id="new-list">
+        <div id="new-list" (click)="addNewList()">
             <i class="pi pi-plus"></i>
             <span>New List</span>
         </div>

@@ -1,7 +1,6 @@
 export interface ListOption {
+    id: string;
     label: string;
-    icon?: {
-        name: string;
-        color: string;
-    };
+    color?: string;
+    icon?: string;
 }

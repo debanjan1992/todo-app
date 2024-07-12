@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
@@ -18,8 +18,12 @@ import { ListsService } from '../../services/lists.service';
   styleUrl: './sidepanel.component.scss'
 })
 export class SidepanelComponent {
+  @Output() listItemSelected = new EventEmitter<{ option: ListOption, default: boolean }>();
+  
+  newList = false;
   defaultList?: ListOption[];
   userList?: ListOption[];
+  selectedTodoList?: ListOption;
 
   constructor(private listsService: ListsService) {}
 
@@ -29,5 +33,17 @@ export class SidepanelComponent {
     this.listsService.getUserLists("abc").then(list => {
       this.userList = list;
     })
+  }
+
+  addNewList() {
+    this.newList = true;
+  }
+
+  onDefaultListItemSelected(option: ListOption) {
+    this.listItemSelected.emit({ option, default: true });
+  }
+
+  onUserListItemSelected(option: ListOption) {
+    this.listItemSelected.emit({ option, default: false });
   }
 }

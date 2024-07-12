@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, setDoc, doc, addDoc, updateDoc, deleteDoc, DocumentReference, DocumentData } from "firebase/firestore";
 import { db } from '../config/firebase';
+import { Task } from '../components/tasks/types';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,24 +14,23 @@ export class ListsService {
   getDefaultLists() {
     return [
       {
-        icon: {
-          name: "sun",
-          color: "gray"
-        },
+        id: "myday",
+        icon: "sun",
+        color: "gray",
         label: "My Day"
       },
       {
-        icon: {
-          name: "star",
-          color: "pink"
-        }, label: "Important"
+        id: "important",
+        icon: "star",
+        color: "pink",
+        label: "Important"
       },
       {
-        icon: {
-          name: "home",
-          color: "blue"
-        }, label: "Tasks"
-      },
+        id: "all",
+        icon: "home",
+        color: "crimson",
+        label: "Tasks"
+      }
     ];
   }
 
@@ -39,11 +40,84 @@ export class ListsService {
     const querySnapshot = await getDocs(q);
 
     return querySnapshot.docs.map(doc => doc.data()).map(data => ({
-      icon: {
-        name: "star",
-        color: data['color']
-      },
+      id: data["id"],
+      color: data["color"],
       label: data['name']
     }));
+  }
+
+  async getTasksInList(listId: string): Promise<Task[]> {
+    const q = query(collection(db, "tasks"), where("listId", "==", listId));
+    const querySnapshot = await getDocs(q);
+
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })).map((data: any) => {
+
+      return {
+        id: data["id"],
+        title: data["title"],
+        completed: data['completed'],
+        important: data['important'],
+        listId: data['listId'],
+        notes: data['notes'],
+      };
+    });
+  }
+
+  async getAllTasks(): Promise<Task[]> {
+    const q = query(collection(db, "tasks"));
+    const querySnapshot = await getDocs(q);
+
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })).map((data: any) => {
+
+      return {
+        id: data["id"],
+        title: data["title"],
+        completed: data['completed'],
+        important: data['important'],
+        listId: data['listId'],
+        notes: data['notes'],
+      };
+    });
+  }
+
+  async getImportantTasks(): Promise<Task[]> {
+    const q = query(collection(db, "tasks"), where("important", "==", true));
+    const querySnapshot = await getDocs(q);
+
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })).map((data: any) => {
+
+      return {
+        id: data["id"],
+        title: data["title"],
+        completed: data['completed'],
+        important: data['important'],
+        listId: data['listId'],
+        notes: data['notes'],
+      };
+    });
+  }
+
+  async addTask(task: Task) {
+    await addDoc(collection(db, "tasks"), {
+      title: task.title,
+      notes: task.notes,
+      completed: task.completed,
+      important: task.important,
+      listId: task.listId,
+    });
+  }
+
+  async updateTask(taskId: string, task: Task) {
+    await updateDoc(doc(db, "tasks", taskId), {
+      title: task.title,
+      notes: task.notes,
+      completed: task.completed,
+      important: task.important,
+      listId: task.listId,
+    });
+  }
+
+  async deleteTask(taskId: string) {
+    await deleteDoc(doc(db, "tasks", taskId));
   }
 }

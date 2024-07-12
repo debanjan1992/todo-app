@@ -1,0 +1,16 @@
+<div id="login-form">
+    <div class="login-wrapper">
+        <form #loginForm="ngForm" (submit)="onFormSubmit()">
+            <div class="input-group">
+                <input type="text" pInputText name="email" placeholder="Email" ngModel required />
+            </div>
+            <div class="input-group">
+                <input type="password" pInputText name="password" placeholder="Password" ngModel required />
+            </div>
+            <!-- <p-password id="password" type="password" pInputText name="password" ngModel /> -->
+             <div class="loginBtn">
+                 <p-button type="submit" [disabled]="loginForm.invalid">Sign in</p-button>
+             </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="tasks" *ngIf="selectedList">
+    <div class="header">
+        <div class="title" [ngStyle]="{ color: selectedList.color }">{{ selectedList.label }}</div>
+        <div class="actions"></div>
+    </div>
+    <div class="tasks-list">
+        <app-task *ngFor="let task of incompleteTasks" [task]="task" (onUpdate)="onTaskUpdate($event)" (onDeleteClicked)="onTaskDelete($event)"></app-task>
+    </div>
+    <div class="tasks-list completed" *ngIf="completeTasks.length > 0">
+        <p-accordion [activeIndex]="0">
+            <p-accordionTab header="Completed">
+                <div class="app-task-wrapper">
+                    <app-task *ngFor="let task of completeTasks" [task]="task" (onUpdate)="onTaskUpdate($event)" (onDeleteClicked)="onTaskDelete($event)"></app-task>
+                </div>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+    <div class="new-task">
+        @if(!newTaskMode) {
+        <div class="new-task-wrapper" (click)="newTaskMode = true;">
+            <i class="pi pi-plus"></i>
+            <span>Add a task</span>
+        </div>
+        } @else {
+        <div class="new-task-wrapper new-task-mode">
+            <i class="pi pi-circle"></i>
+            <div class="input-wrapper">
+                <div #newTaskEl autofocus contenteditable="true"
+                    placeholder="Try typing 'Pay utilities bill by Friday 6pm'" [textContent]="newTaskText"
+                    class="new-task-text" (input)="updateTaskText($event)" (keypress)="onAdd($event)" (blur)="onBlur()">
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

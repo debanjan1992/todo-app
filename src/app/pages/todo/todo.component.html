@@ -1,6 +1,8 @@
 <div class="todo">
     <div class="panel">
-        <app-sidepanel></app-sidepanel>
+        <app-sidepanel (listItemSelected)="onListItemSelected($event)"></app-sidepanel>
     </div>
-    <div class="panel"></div>
+    <div class="panel">
+        <app-tasks [selectedList]="selectedTaskList" [isDefault]="isDefaultList"></app-tasks>
+    </div>
 </div>

@@ -1,0 +1,23 @@
+#login-form {
+    .login-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px;
+
+        .input-group {
+            margin-bottom: 10px;
+
+            input {
+                width: 300px;
+                height: 40px;
+                padding: 5px 10px;
+                border-radius: var(--border-radius)
+            }
+        }
+
+        .loginBtn {
+            margin-top: 20px;
+        }
+    }
+}
